@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EnterpriseKnowledgeCopilot.Application\EnterpriseKnowledgeCopilot.Application.csproj" />
+    <ProjectReference Include="..\EnterpriseKnowledgeCopilot.Infrastructure\EnterpriseKnowledgeCopilot.Infrastructure.csproj" />
+    <ProjectReference Include="..\EnterpriseKnowledgeCopilot.Contracts\EnterpriseKnowledgeCopilot.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

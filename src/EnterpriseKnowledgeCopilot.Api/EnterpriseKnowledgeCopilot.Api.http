@@ -1,0 +1,13 @@
+@EnterpriseKnowledgeCopilot.Api_HostAddress = http://localhost:5050
+
+GET {{EnterpriseKnowledgeCopilot.Api_HostAddress}}/api/health
+Accept: application/json
+
+###
+
+POST {{EnterpriseKnowledgeCopilot.Api_HostAddress}}/api/chat
+Content-Type: application/json
+
+{
+  "question": "What is the approval process for emergency communication?"
+}

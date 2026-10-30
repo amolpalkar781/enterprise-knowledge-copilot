@@ -1,0 +1,161 @@
+<div class="workspace">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="Enterprise Knowledge Copilot home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M8 7.5h10.5a5.5 5.5 0 0 1 0 11H13a5.5 5.5 0 0 0 0 11h11" />
+          <path d="M24 24.5H13.5a5.5 5.5 0 0 1 0-11H19a5.5 5.5 0 0 0 0-11H8" />
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <strong>Northstar</strong>
+        <small>KNOWLEDGE COPILOT</small>
+      </span>
+    </a>
+
+    <div class="sidebar-label">WORKSPACE</div>
+    <nav class="primary-nav">
+      <a class="nav-link active" href="/" aria-current="page">
+        <span class="nav-icon chat-icon" aria-hidden="true"></span>
+        <span>Ask a question</span>
+      </a>
+      <button class="nav-link" [class.active]="showLibrary()" type="button" (click)="showLibrary.set(!showLibrary())">
+        <span class="nav-icon library-icon" aria-hidden="true"></span>
+        <span>Document library</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-spacer"></div>
+
+    <div class="privacy-card">
+      <span class="privacy-icon" aria-hidden="true">◇</span>
+      <div>
+        <strong>Grounded by design</strong>
+        <p>Answers will cite the documents that support them.</p>
+      </div>
+    </div>
+
+    <div class="profile-row">
+      <div class="avatar">EK</div>
+      <div class="profile-copy">
+        <strong>Knowledge workspace</strong>
+        <small>Local development</small>
+      </div>
+      <span class="profile-menu" aria-hidden="true">•••</span>
+    </div>
+  </aside>
+
+  <main class="main-panel">
+    <header class="topbar">
+      <div class="breadcrumbs"><span>Workspace</span><span class="crumb-divider">/</span><strong>Ask</strong></div>
+      <div class="topbar-right">
+        <div class="connection-pill" [class.online]="apiStatus() === 'online'" [class.offline]="apiStatus() === 'offline'">
+          <span class="connection-dot"></span>
+          @switch (apiStatus()) {
+            @case ('online') { API connected }
+            @case ('offline') { API offline }
+            @default { Connecting… }
+          }
+        </div>
+        <button class="help-button" type="button" aria-label="About this project" title="Enterprise Knowledge Copilot">?</button>
+      </div>
+    </header>
+
+    <section class="content-area">
+      <div class="content-wrap">
+        <div class="eyebrow"><span class="eyebrow-line"></span> ENTERPRISE KNOWLEDGE</div>
+        <h1>What would you like<br class="desktop-break" /> to understand?</h1>
+        <p class="intro-copy">Ask a question across your organization’s knowledge. Every answer is designed to be grounded in source documents.</p>
+
+        @if (showLibrary()) {
+          <section class="library-panel" aria-label="Document library">
+            <div class="library-header"><div><h2>Document library</h2><p>Supported: .txt and .md, up to 5 MB. Uploading sends the file to OpenAI File Search for indexing.</p></div>
+              <label class="upload-button">{{ isUploading() ? 'Adding…' : 'Add a document' }}<input type="file" accept=".txt,.md,text/plain,text/markdown" [disabled]="isUploading()" (change)="uploadFile($event)" /></label>
+            </div>
+            @if (uploadMessage()) { <p class="upload-message" role="status">{{ uploadMessage() }}</p> }
+            @if (documents().length === 0) { <p class="empty-library">No documents yet. Add a text or Markdown file to begin.</p> }
+            @else { <div class="document-list">@for (document of documents(); track document.id) {
+              <article class="document-row"><span class="document-icon">TXT</span><div><strong>{{ document.fileName }}</strong><small>{{ document.indexedInOpenAi ? 'Indexed in OpenAI File Search' : 'Local copy only · upload again to index' }} · Added {{ document.uploadedAt | date:'mediumDate' }}</small></div></article>
+            }</div> }
+          </section>
+        }
+
+        @if (messages().length === 0) {
+          <div class="suggestion-section">
+            <div class="suggestion-heading"><span>TRY A QUESTION</span><span class="heading-rule"></span></div>
+            <div class="suggestion-grid">
+              @for (prompt of prompts; track prompt; let index = $index) {
+                <button class="suggestion-card" type="button" (click)="choosePrompt(prompt)">
+                  <span class="suggestion-number">0{{ index + 1 }}</span>
+                  <span>{{ prompt }}</span>
+                  <span class="suggestion-arrow" aria-hidden="true">↗</span>
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="conversation" aria-live="polite">
+          @for (message of messages(); track $index) {
+            <article class="message" [class.user-message]="message.role === 'user'" [class.assistant-message]="message.role === 'assistant'">
+              @if (message.role === 'assistant') {
+                <div class="message-avatar" aria-hidden="true">N</div>
+              }
+              <div class="message-body">
+                <div class="message-meta">
+                  <strong>{{ message.role === 'assistant' ? 'Northstar' : 'You' }}</strong>
+                  @if (message.role === 'assistant' && message.grounded) {
+                    <span class="grounded-label"><span>✓</span> SOURCE-GROUNDED</span>
+                  }
+                </div>
+                <p>{{ message.content }}</p>
+                @if (message.citations?.length) {
+                  <div class="citation-list">
+                    @for (citation of message.citations; track citation.citationId) {
+                      <article class="citation-card">
+                        <div class="citation-topline">
+                          <span class="citation-index">{{ citation.citationId }}</span>
+                          <strong>{{ citation.documentName }}</strong>
+                          @if (citation.pageNumber) { <span class="page-number">Page {{ citation.pageNumber }}</span> }
+                        </div>
+                        <p>{{ citation.excerpt }}</p>
+                      </article>
+                    }
+                  </div>
+                }
+                @if (message.role === 'assistant' && message.grounded === false) {
+                  <div class="grounding-note"><span aria-hidden="true">i</span> No supporting source documents were found.</div>
+                }
+              </div>
+            </article>
+          }
+          @if (isSending()) {
+            <div class="thinking-row"><div class="message-avatar">N</div><div class="thinking-bubble"><span></span><span></span><span></span></div><span>Searching your knowledge…</span></div>
+          }
+        </div>
+
+        <form class="composer" (ngSubmit)="sendMessage()">
+          <label class="visually-hidden" for="question">Ask your knowledge base</label>
+          <textarea
+            id="question"
+            name="question"
+            [ngModel]="draft()"
+            (ngModelChange)="draft.set($event)"
+            (keydown.enter)="onComposerEnter($event)"
+            placeholder="Ask a question about your documents…"
+            rows="2"
+            [disabled]="isSending()"></textarea>
+          <div class="composer-footer">
+            <span class="composer-hint"><kbd>Enter</kbd> to send <span>·</span> <kbd>Shift + Enter</kbd> for a new line</span>
+            <button class="send-button" type="submit" [disabled]="!draft().trim() || isSending()" aria-label="Send question">
+              <span>Ask Copilot</span><span class="send-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+
+        <p class="disclaimer"><span aria-hidden="true">◇</span> Answers are generated from retrieved content. Always verify important information against its source.</p>
+      </div>
+    </section>
+  </main>
+</div>
+

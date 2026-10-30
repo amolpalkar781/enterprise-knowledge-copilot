@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{853C5A4A-47C9-4424-9253-8DBBBB86146F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseKnowledgeCopilot.Api", "src\EnterpriseKnowledgeCopilot.Api\EnterpriseKnowledgeCopilot.Api.csproj", "{030C89E0-F653-4DCF-9708-4BBA4F4432BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseKnowledgeCopilot.Application", "src\EnterpriseKnowledgeCopilot.Application\EnterpriseKnowledgeCopilot.Application.csproj", "{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseKnowledgeCopilot.Domain", "src\EnterpriseKnowledgeCopilot.Domain\EnterpriseKnowledgeCopilot.Domain.csproj", "{E6977C62-AA76-4238-B91F-0CB7663C4701}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseKnowledgeCopilot.Infrastructure", "src\EnterpriseKnowledgeCopilot.Infrastructure\EnterpriseKnowledgeCopilot.Infrastructure.csproj", "{051DC7DC-36E9-4826-9EA9-49C3180A2A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseKnowledgeCopilot.Contracts", "src\EnterpriseKnowledgeCopilot.Contracts\EnterpriseKnowledgeCopilot.Contracts.csproj", "{928F9D2E-3C95-443A-B0CF-B78D224EFC86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{030C89E0-F653-4DCF-9708-4BBA4F4432BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030C89E0-F653-4DCF-9708-4BBA4F4432BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030C89E0-F653-4DCF-9708-4BBA4F4432BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030C89E0-F653-4DCF-9708-4BBA4F4432BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6977C62-AA76-4238-B91F-0CB7663C4701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6977C62-AA76-4238-B91F-0CB7663C4701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6977C62-AA76-4238-B91F-0CB7663C4701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6977C62-AA76-4238-B91F-0CB7663C4701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051DC7DC-36E9-4826-9EA9-49C3180A2A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051DC7DC-36E9-4826-9EA9-49C3180A2A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051DC7DC-36E9-4826-9EA9-49C3180A2A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051DC7DC-36E9-4826-9EA9-49C3180A2A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928F9D2E-3C95-443A-B0CF-B78D224EFC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928F9D2E-3C95-443A-B0CF-B78D224EFC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928F9D2E-3C95-443A-B0CF-B78D224EFC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928F9D2E-3C95-443A-B0CF-B78D224EFC86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{030C89E0-F653-4DCF-9708-4BBA4F4432BF} = {853C5A4A-47C9-4424-9253-8DBBBB86146F}
+		{FC8B2FF6-85CB-45D6-8A48-C4C90CDD0677} = {853C5A4A-47C9-4424-9253-8DBBBB86146F}
+		{E6977C62-AA76-4238-B91F-0CB7663C4701} = {853C5A4A-47C9-4424-9253-8DBBBB86146F}
+		{051DC7DC-36E9-4826-9EA9-49C3180A2A11} = {853C5A4A-47C9-4424-9253-8DBBBB86146F}
+		{928F9D2E-3C95-443A-B0CF-B78D224EFC86} = {853C5A4A-47C9-4424-9253-8DBBBB86146F}
+	EndGlobalSection
+EndGlobal

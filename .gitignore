@@ -1,0 +1,15 @@
+.local/
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+.vs/
+.idea/
+.vscode/*.log
+.env
+.env.*
+!.env.example
+*.user
+*.suo
+*.cache
+
